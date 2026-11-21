@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&amp;family=Be+Vietnam+Pro:wght@400;600;700&amp;display=swap">
+<style>
+html,body{margin:0;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--acc)}a:hover{color:var(--fg)}
+.bz{--bg:#0f4d3a;--deep:#0a3528;--line:#1f6b52;--fg:#f4ecd8;--mut:#c9d3c7;--acc:#d9a441;--onacc:#13201b;--cell:#0a3528;--hov:rgba(244,236,216,.08);--ivory:#f4ecd8;--ink:#13201b;--inkmut:#4f5a53;height:100dvh;display:flex;flex-direction:column;background:var(--bg);color:var(--fg);font-family:'Be Vietnam Pro',system-ui,sans-serif;font-size:16px;line-height:1.45;overflow:hidden;position:relative}
+.bz[data-v="navy"]{--bg:#1d3f6e;--deep:#142d50;--line:#2f5a8f;--cell:#142d50;--mut:#c6d2e3}
+.bz[data-v="wine"]{--bg:#5a1f2a;--deep:#3f141c;--line:#7a3542;--cell:#3f141c;--mut:#e3c9cd}
+.scr{flex:1;min-height:0;display:flex;flex-direction:column}
+.top{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 20px}
+.ttl{flex:1 1 200px;min-width:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.h{font-family:'Fraunces',serif;font-weight:800;letter-spacing:-.02em;line-height:1;margin:0}
+.ib{width:48px;height:48px;flex:none;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:inherit;display:grid;place-items:center;padding:0;font:800 24px/1 'Fraunces',serif}
+.ib:hover{background:var(--hov)}
+.ib.acc{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.pill{height:48px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:inherit;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;white-space:nowrap;text-decoration:none}
+.pill:hover{background:var(--hov)}
+.pill.acc{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+.pill.iv{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+.pill.acc:hover,.pill.iv:hover,.ib.acc:hover{filter:brightness(.94)}
+.pill:disabled{opacity:.4;cursor:default}
+.pill .sm{font-weight:400;font-size:12px;color:var(--mut)}
+.body{flex:1;min-height:0;overflow:auto;padding:4px 20px 24px}
+.wrap{max-width:1180px;margin:0 auto;width:100%}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.panel{background:var(--deep);border:1.5px solid var(--line);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.ivc{background:var(--ivory);color:var(--ink);border:none;border-radius:28px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0;text-align:left}
+.ivc .lbl{color:var(--inkmut)}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.note{font-size:14px;color:var(--mut);text-wrap:pretty}
+.seg{display:flex;flex-wrap:wrap;padding:4px;border-radius:26px;background:var(--deep);border:1.5px solid var(--line);gap:2px}
+.seg button{flex:1 1 auto;height:40px;padding:0 14px;border:none;border-radius:999px;font-weight:700;font-size:14px;white-space:nowrap}
+.fld{display:flex;align-items:center;height:52px;border-radius:18px;background:var(--deep);border:1.5px solid var(--line);overflow:hidden;min-width:0}
+.fld:focus-within{border-color:var(--acc)}
+.fld input{flex:1;min-width:0;width:100%;height:100%;border:none;background:transparent;padding:0 14px;font-weight:600;font-size:16px;caret-color:var(--acc);outline:none}
+.fld .u{padding:0 14px 0 4px;font-weight:700;color:var(--mut)}
+.fld.on{border-color:var(--acc)}
+.step{display:flex;align-items:center;gap:10px}
+.ball{width:40px;height:40px;flex:none;border-radius:50%;display:grid;place-items:center;box-shadow:inset -5px -5px 0 rgba(0,0,0,.2);background:#e3b23c}
+.ball i{font-style:normal;width:52%;height:52%;border-radius:50%;background:#fff;color:#13201b;display:grid;place-items:center;font-weight:700;font-size:12px}
+.b2{background:#2f5fb3}.b3{background:#c8372d}.b4{background:#6b3fa0}.b8{background:#13201b}
+.tag{flex:none;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1.5px solid var(--line);color:var(--mut);white-space:nowrap}
+.tag.warn{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+.big{font-family:'Fraunces',serif;font-weight:800;letter-spacing:-.04em;line-height:.85;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+.games{display:flex;flex-wrap:wrap;gap:16px}
+.game{flex:1 1 250px;min-width:0;border-radius:32px;background:var(--deep);border:1.5px solid var(--line);color:var(--fg);text-align:left;padding:22px;display:flex;flex-direction:column;gap:14px}
+.game:hover{border-color:var(--acc)}
+.go{margin-top:auto;align-self:flex-start;padding:11px 18px;border-radius:999px;background:var(--ivory);color:var(--ink);font-weight:700;font-size:15px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:12px 18px;border-radius:24px;background:var(--deep)}
+.chip{padding:5px 12px;border-radius:999px;background:var(--line);font-weight:600;font-size:13px;white-space:nowrap}
+.cells{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.cells button{height:52px;border-radius:14px;border:1.5px solid var(--line);font:800 19px/1 'Fraunces',serif;font-variant-numeric:tabular-nums;padding:0;user-select:none}
+.cells button:hover{border-color:var(--acc)}
+.cells button:active{background:var(--acc)!important;color:var(--onacc)}
+.duo,.trio,.side{flex:1;min-height:0;display:grid;gap:16px;padding:4px 20px 20px}
+.duo{grid-template-columns:repeat(2,minmax(0,1fr))}
+.trio{grid-template-columns:repeat(3,minmax(0,1fr))}
+.side{grid-template-columns:minmax(260px,1fr) minmax(0,2fr)}
+.tapz{flex:1;min-height:0;border:none;background:transparent;color:inherit;text-align:left;padding:0 22px;display:flex;align-items:center;user-select:none;border-radius:20px}
+.tapz:active{background:var(--hov)}
+.pscore{font-size:clamp(110px,17vw,240px)}
+.list{display:flex;flex-direction:column;gap:10px;overflow:auto;min-height:0}
+.ctl{display:flex;align-items:center;gap:8px}
+.ov{position:absolute;inset:0;z-index:5;background:rgba(8,18,14,.62);display:grid;place-items:center;padding:16px;overflow:auto}
+.modal{width:min(540px,100%)}
+@media (max-width:900px){
+.bz{height:auto;min-height:100dvh;overflow:visible}
+.duo,.trio,.side{grid-template-columns:minmax(0,1fr)}
+.body{overflow:visible}
+.list{overflow:visible}
+.ov{position:fixed}
+.pscore{font-size:128px}
+.tapz{min-height:150px}
+}
+@media (max-width:560px){
+.top{padding:12px 14px;gap:8px}
+.body,.duo,.trio,.side{padding-left:14px;padding-right:14px}
+.hs{display:none}
+.pill{padding:0 14px}
+.ctl .fld{width:110px!important}
+}
+</style>
+</helmet>
+<div class="bz" data-v="{{ variant }}">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div class="scr" data-screen-label="Home">
+  <div class="top wrap">
+    <div class="ttl" style="gap:12px">
+      <span class="ball b8" style="width:44px;height:44px"><i>8</i></span>
+      <span class="h" style="font-size:28px">Bida</span>
+      <span class="hs" style="font-size:14px;color:var(--mut)">{{ t.brand }}</span>
+    </div>
+    <div class="seg" style="flex:none;border-radius:999px">
+      <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
+        <button type="button" onClick="{{ l.onClick }}" style="background:{{ l.bg }};color:{{ l.fg }}">{{ l.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+  <div class="body">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:28px">
+    <sc-if value="{{ hasLive }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ resume }}" class="ivc" style="flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px 16px;box-shadow:0 20px 40px rgba(0,0,0,.25)">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#8a2a21"><span style="width:10px;height:10px;border-radius:50%;background:#c8372d"></span>{{ t.resume }}</span>
+        <span style="flex:1 1 240px;min-width:0;font-weight:700;font-size:17px">{{ liveLabel }}</span>
+        <span style="height:48px;padding:0 20px;border-radius:999px;background:var(--ink);color:var(--ivory);display:inline-flex;align-items:center;gap:8px;font-weight:700">{{ t.resume }}<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+      </button>
+    </sc-if>
+    <section style="display:flex;flex-direction:column;gap:16px">
+      <h1 class="h" style="font-size:clamp(30px,4vw,44px)">{{ t.choose }}</h1>
+      <div class="games">
+        <button type="button" onClick="{{ pickPool }}" class="game">
+          <span class="ball" style="width:88px;height:88px;box-shadow:inset -11px -11px 0 rgba(0,0,0,.18)"><i style="font-size:18px">9</i></span>
+          <span class="h" style="font-size:32px">{{ t.pool }}</span>
+          <span style="color:var(--mut)">{{ t.poolSub }}</span>
+          <span class="go">{{ t.start }} →</span>
+        </button>
+        <button type="button" onClick="{{ pickDen }}" class="game">
+          <span style="display:flex"><span class="ball b3" style="width:88px;height:88px;box-shadow:inset -11px -11px 0 rgba(0,0,0,.18)"><i style="font-size:18px">3</i></span><span class="ball b2" style="width:88px;height:88px;margin-left:-28px;box-shadow:inset -11px -11px 0 rgba(0,0,0,.18)"><i style="font-size:18px">2</i></span></span>
+          <span class="h" style="font-size:32px">{{ t.den }}</span>
+          <span style="color:var(--mut)">{{ t.denSub }}</span>
+          <span class="go">{{ t.start }} →</span>
+        </button>
+        <button type="button" onClick="{{ pickXd }}" class="game">
+          <span style="display:flex;height:88px;align-items:center"><span style="width:58px;height:82px;border-radius:10px;background:var(--ivory);color:#c8372d;transform:rotate(-10deg);display:flex;flex-direction:column;justify-content:space-between;padding:6px 8px;font:800 17px/1 'Fraunces',serif">A<span style="align-self:flex-end;transform:rotate(180deg)">A</span></span><span style="width:58px;height:82px;margin-left:-16px;border-radius:10px;background:var(--ink);border:2px solid var(--ivory);color:var(--ivory);transform:rotate(8deg);display:flex;flex-direction:column;justify-content:space-between;padding:6px 8px;font:800 17px/1 'Fraunces',serif">K<span style="align-self:flex-end;transform:rotate(180deg)">K</span></span></span>
+          <span class="h" style="font-size:32px">{{ t.xd }}</span>
+          <span style="color:var(--mut)">{{ t.xdSub }}</span>
+          <span class="go">{{ t.start }} →</span>
+        </button>
+      </div>
+    </section>
+    <section style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px">
+        <h2 class="h" style="font-size:clamp(26px,3.4vw,36px)">{{ t.history }}</h2>
+        <button type="button" onClick="{{ openHistory }}" class="pill">{{ t.seeAll }} →</button>
+      </div>
+      <sc-if value="{{ hasHistory }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ recent }}" as="r" hint-placeholder-count="3">
+            <div class="row">
+              <span class="chip">{{ r.when }}</span>
+              <span style="flex:1 1 200px;min-width:0;color:var(--mut);font-size:14px">{{ r.game }}</span>
+              <span style="font-weight:700">{{ r.result }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ noHistory }}" hint-placeholder-val="{{ true }}">
+        <p class="note" style="margin:0">{{ t.empty }}</p>
+      </sc-if>
+    </section>
+  </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSetup }}" hint-placeholder-val="{{ false }}">
+<div class="scr" data-screen-label="Setup">
+  <div class="top">
+    <button type="button" onClick="{{ goHome }}" class="ib" aria-label="{{ t.home }}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+    <div class="ttl"><h1 class="h" style="font-size:28px">{{ setupTitle }}</h1></div>
+    <button type="button" onClick="{{ start }}" class="pill acc" style="padding:0 24px">{{ t.start }} →</button>
+  </div>
+  <div class="body">
+  <div class="cols">
+    <div class="panel">
+      <span class="lbl">{{ namesLabel }}</span>
+      <sc-for list="{{ setupNames }}" as="p" hint-placeholder-count="3">
+        <label class="fld" style="padding-left:6px">
+          <span class="ball b{{ p.n }}" style="width:38px;height:38px"><i>{{ p.n }}</i></span>
+          <input value="{{ p.value }}" onChange="{{ p.onChange }}">
+        </label>
+      </sc-for>
+      <sc-if value="{{ isDenMode }}" hint-placeholder-val="{{ false }}">
+        <span class="note">{{ t.denNote }}</span>
+      </sc-if>
+    </div>
+    <div class="panel">
+      <sc-if value="{{ isPoolMode }}" hint-placeholder-val="{{ true }}">
+        <span class="lbl">{{ t.raceTo }}</span>
+        <div class="step">
+          <button type="button" onClick="{{ raceDec }}" class="ib" style="width:60px;height:60px" aria-label="−">−</button>
+          <span class="big" style="flex:1;text-align:center;font-size:84px">{{ race }}</span>
+          <button type="button" onClick="{{ raceInc }}" class="ib" style="width:60px;height:60px" aria-label="+">+</button>
+        </div>
+        <span class="note">{{ t.raceNote }}</span>
+      </sc-if>
+      <sc-if value="{{ isDenMode }}" hint-placeholder-val="{{ false }}">
+        <span class="lbl">{{ t.money }}</span>
+        <div class="seg">
+          <sc-for list="{{ moneyOpts }}" as="o" hint-placeholder-count="2">
+            <button type="button" onClick="{{ o.onClick }}" style="background:{{ o.bg }};color:{{ o.fg }}">{{ o.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ moneyOn }}" hint-placeholder-val="{{ false }}">
+          <span class="lbl" style="margin-top:6px">{{ t.perPoint }}</span>
+          <div class="seg">
+            <sc-for list="{{ unitChips }}" as="u" hint-placeholder-count="4">
+              <button type="button" onClick="{{ u.onClick }}" style="background:{{ u.bg }};color:{{ u.fg }}">{{ u.label }}</button>
+            </sc-for>
+          </div>
+          <label class="fld" style="border-color:{{ customBorder }}">
+            <span class="u" style="padding:0 0 0 14px">{{ t.custom }}</span>
+            <input inputmode="numeric" placeholder="{{ t.customPh }}" value="{{ unitCustom }}" onChange="{{ onCustom }}" class="num">
+            <span class="u">đ</span>
+          </label>
+        </sc-if>
+      </sc-if>
+    </div>
+    <div class="panel">
+      <span class="lbl">{{ t.rate }}</span>
+      <div class="step">
+        <button type="button" onClick="{{ rateDec }}" class="ib" aria-label="−">−</button>
+        <label class="fld" style="flex:1"><input inputmode="numeric" value="{{ rateInput }}" onChange="{{ onRate }}" onFocus="{{ selectAll }}" class="num" style="font:800 22px/1 'Fraunces',serif" aria-label="{{ t.rate }}"><span class="u">đ</span></label>
+        <button type="button" onClick="{{ rateInc }}" class="ib" aria-label="+">+</button>
+      </div>
+      <span class="lbl" style="margin-top:6px">{{ t.split }}</span>
+      <div class="seg">
+        <sc-for list="{{ splitOpts }}" as="o" hint-placeholder-count="2">
+          <button type="button" onClick="{{ o.onClick }}" style="background:{{ o.bg }};color:{{ o.fg }}">{{ o.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPool }}" hint-placeholder-val="{{ false }}">
+<div class="scr" data-screen-label="Pool board">
+  <div class="top">
+    <button type="button" onClick="{{ goHome }}" class="ib" aria-label="{{ t.home }}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+    <div class="ttl"><h1 class="h" style="font-size:24px">{{ t.raceTo }} {{ race }}</h1><span style="color:var(--mut);font-size:14px">{{ t.rack }} {{ rackNo }}</span></div>
+    <button type="button" onClick="{{ toggleTimer }}" class="pill num">
+      <sc-if value="{{ running }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:currentColor"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg></sc-if>
+      <sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--acc)"><polygon points="7 4 20 12 7 20"></polygon></svg></sc-if>
+      {{ elapsed }}<span class="sm">{{ billLabel }}</span>
+    </button>
+    <button type="button" onClick="{{ swapBreak }}" class="pill">{{ t.swap }}</button>
+    <button type="button" onClick="{{ undo }}" disabled="{{ cantUndo }}" class="pill">↶ {{ t.undo }}</button>
+  </div>
+  <div class="duo">
+    <sc-for list="{{ poolPanels }}" as="p" hint-placeholder-count="2">
+      <div class="panel" style="padding:18px 0;gap:6px">
+        <div style="display:flex;align-items:center;gap:12px;padding:0 20px;min-width:0">
+          <span class="ball b{{ p.n }}" style="width:44px;height:44px"><i>{{ p.n }}</i></span>
+          <span class="h" style="flex:1;min-width:0;font-size:24px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.name }}</span>
+          <sc-if value="{{ p.isBreaker }}" hint-placeholder-val="{{ false }}"><span class="tag warn">{{ t.breakTag }}</span></sc-if>
+        </div>
+        <button type="button" onClick="{{ p.onTap }}" class="tapz" aria-label="{{ t.tapHint }}"><span class="big pscore">{{ p.score }}</span></button>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:0 20px">
+          <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <sc-for list="{{ p.pips }}" as="d" hint-placeholder-count="7">
+                <span style="width:14px;height:14px;border-radius:50%;border:2px solid var(--fg);background:{{ d.bg }}"></span>
+              </sc-for>
+            </div>
+            <span style="font-size:13px;color:var(--mut)">{{ t.tapHint }}</span>
+          </div>
+          <button type="button" onClick="{{ p.onMinus }}" class="ib" style="width:56px;height:56px" aria-label="−1">−</button>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <sc-if value="{{ hasWinner }}" hint-placeholder-val="{{ false }}">
+    <div class="ov">
+      <div class="ivc modal" style="box-shadow:0 30px 60px rgba(0,0,0,.35)">
+        <span class="lbl" style="color:#8a2a21">{{ t.winner }}</span>
+        <span class="h" style="font-size:44px">{{ winnerName }}</span>
+        <span class="big" style="font-size:40px">{{ finalScore }}</span>
+        <span style="font-size:14px;color:var(--inkmut)">{{ t.duration }} {{ elapsed }}</span>
+        <label class="fld" style="background:#ebe0c6;border-color:{{ billBorder }}">
+          <span class="u" style="padding:0 0 0 14px;color:var(--inkmut)">{{ t.bill }}</span>
+          <input inputmode="numeric" value="{{ billOverride }}" placeholder="{{ billAutoLabel }}" onChange="{{ onBill }}" class="num" style="font:800 20px/1 'Fraunces',serif;color:var(--ink)">
+          <span class="u" style="color:var(--inkmut)">đ</span>
+        </label>
+        <span style="font-size:14px;color:var(--inkmut)">{{ poolBillNote }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
+          <button type="button" onClick="{{ rematch }}" class="pill" style="background:var(--ink);color:var(--ivory);border-color:var(--ink);flex:1 1 140px">{{ t.rematch }}</button>
+          <button type="button" onClick="{{ undo }}" class="pill" style="border-color:#cbbf9f;color:var(--ink)">{{ t.undo }}</button>
+          <button type="button" onClick="{{ endPool }}" class="pill" style="border-color:#cbbf9f;color:var(--ink)">{{ t.home }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDen }}" hint-placeholder-val="{{ false }}">
+<div class="scr" data-screen-label="Den board">
+  <div class="top">
+    <button type="button" onClick="{{ goHome }}" class="ib" aria-label="{{ t.home }}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+    <div class="ttl"><h1 class="h" style="font-size:24px">{{ t.rack }} {{ denRack }}</h1>
+      <sc-if value="{{ boardOff }}" hint-placeholder-val="{{ false }}"><span role="status" class="tag warn">⚠ {{ boardWarn }}</span></sc-if>
+    </div>
+    <button type="button" onClick="{{ toggleTimer }}" class="pill num">
+      <sc-if value="{{ running }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:currentColor"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg></sc-if>
+      <sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--acc)"><polygon points="7 4 20 12 7 20"></polygon></svg></sc-if>
+      {{ elapsed }}<span class="sm">{{ billLabel }}</span>
+    </button>
+    <button type="button" onClick="{{ undo }}" disabled="{{ cantUndo }}" class="pill">↶ {{ t.undo }}</button>
+    <button type="button" onClick="{{ endRack }}" class="pill">✓ {{ t.endRack }}</button>
+    <button type="button" onClick="{{ finishDen }}" class="pill acc">{{ t.finish }}</button>
+  </div>
+  <div class="trio">
+    <sc-for list="{{ denCols }}" as="c" hint-placeholder-count="3">
+      <div class="panel" style="justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px;min-width:0">
+          <span class="ball b{{ c.n }}"><i>{{ c.n }}</i></span>
+          <span class="h" style="flex:1;min-width:0;font-size:21px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ c.name }}</span>
+          <sc-if value="{{ c.hasLast }}" hint-placeholder-val="{{ false }}"><span class="tag num">{{ t.last }} {{ c.last }}</span></sc-if>
+          <button type="button" onClick="{{ c.onSub }}" class="ib" style="width:40px;height:40px" aria-label="{{ t.swapP }}" title="{{ t.swapP }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></button>
+        </div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:8px;flex-wrap:wrap">
+          <span class="big" style="font-size:clamp(72px,9vw,108px);color:{{ c.ptsColor }}">{{ c.pts }}</span>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+            <sc-if value="{{ c.hasCarry }}" hint-placeholder-val="{{ false }}"><span class="tag num" style="color:var(--fg)">{{ c.carryLabel }}</span></sc-if>
+            <sc-if value="{{ moneyOn }}" hint-placeholder-val="{{ false }}"><span class="num" style="font-weight:700;font-size:15px;color:{{ c.ptsColor }}">{{ c.money }}</span></sc-if>
+          </div>
+        </div>
+        <div class="cells">
+          <sc-for list="{{ c.cells }}" as="k" hint-placeholder-count="12">
+            <button type="button" onClick="{{ k.onClick }}" style="background:{{ k.bg }}">{{ k.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <sc-if value="{{ hasSub }}" hint-placeholder-val="{{ false }}">
+    <div class="ov">
+      <div class="ivc modal" style="box-shadow:0 30px 60px rgba(0,0,0,.35)">
+        <span class="lbl" style="color:#8a2a21">{{ subTitle }}</span>
+        <span style="font-size:15px;text-wrap:pretty">{{ subNote }}</span>
+        <label class="fld" style="background:#ebe0c6;border-color:#cbbf9f"><input value="{{ subName }}" onChange="{{ onSubName }}" placeholder="{{ t.newName }}" aria-label="{{ t.newName }}" style="color:var(--ink)"></label>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <button type="button" onClick="{{ cancelSub }}" class="pill" style="border-color:#cbbf9f;color:var(--ink);flex:1 1 120px">{{ t.cancel }}</button>
+          <button type="button" onClick="{{ confirmSub }}" class="pill" style="background:var(--ink);color:var(--ivory);border-color:var(--ink);flex:1 1 120px;opacity:{{ subOpacity }}">{{ t.confirm }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+<div class="scr" data-screen-label="Den summary">
+  <div class="top">
+    <button type="button" onClick="{{ backToDen }}" class="ib" aria-label="{{ t.cont }}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+    <div class="ttl"><h1 class="h" style="font-size:28px">{{ t.summary }}</h1><span style="color:var(--mut);font-size:14px">{{ racksDone }}</span></div>
+    <button type="button" onClick="{{ backToDen }}" class="pill">{{ t.cont }}</button>
+    <button type="button" onClick="{{ closeDen }}" class="pill acc">{{ t.close }}</button>
+  </div>
+  <div class="body">
+  <div class="cols">
+    <div class="panel">
+      <span class="lbl">{{ t.standing }}</span>
+      <sc-if value="{{ sumOff }}" hint-placeholder-val="{{ false }}"><span role="status" class="tag warn" style="align-self:flex-start;white-space:normal">⚠ {{ sumWarn }}</span></sc-if>
+      <sc-for list="{{ ranking }}" as="r" hint-placeholder-count="3">
+        <div class="row" style="background:var(--bg)">
+          <span class="h" style="font-size:22px;color:var(--mut);width:20px">{{ r.rank }}</span>
+          <span style="flex:1;min-width:0;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</span>
+          <span class="big" style="font-size:32px;color:{{ r.color }}">{{ r.pts }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div class="panel">
+      <span class="lbl">{{ t.whoPays }}</span>
+      <sc-for list="{{ settlements }}" as="s" hint-placeholder-count="2">
+        <div class="ivc" style="padding:14px 18px;gap:4px;border-radius:22px">
+          <span style="font-weight:600">{{ s.from }} → {{ s.to }}</span>
+          <span class="big" style="font-size:30px">{{ s.amt }}</span>
+        </div>
+      </sc-for>
+      <sc-if value="{{ noSettle }}" hint-placeholder-val="{{ false }}"><span class="note">{{ t.even }}</span></sc-if>
+    </div>
+    <div class="panel">
+      <span class="lbl">{{ t.bill }}</span>
+      <label class="fld" style="border-color:{{ billBorder }}">
+        <input inputmode="numeric" value="{{ billOverride }}" placeholder="{{ billAutoLabel }}" onChange="{{ onBill }}" class="num" style="font:800 22px/1 'Fraunces',serif" aria-label="{{ t.bill }}">
+        <span class="u">đ</span>
+      </label>
+      <span class="note">{{ t.billAuto }}: {{ elapsed }} × {{ rateLabel }}/h = {{ billAutoLabel }}</span>
+      <sc-if value="{{ hasOverride }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ clearBill }}" class="pill" style="align-self:flex-start;height:40px">{{ t.useAuto }}</button></sc-if>
+      <sc-for list="{{ billShares }}" as="b" hint-placeholder-count="3">
+        <div style="display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--line)">
+          <span style="font-weight:600">{{ b.name }}</span>
+          <span class="num" style="font-weight:700">{{ b.amt }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isXdSetup }}" hint-placeholder-val="{{ false }}">
+<div class="scr" data-screen-label="Xi dach setup">
+  <div class="top">
+    <button type="button" onClick="{{ goHome }}" class="ib" aria-label="{{ t.home }}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+    <div class="ttl"><h1 class="h" style="font-size:28px">{{ t.xd }}</h1></div>
+    <button type="button" onClick="{{ start }}" class="pill acc" style="padding:0 24px">{{ t.start }} →</button>
+  </div>
+  <div class="body">
+  <div class="cols">
+    <div class="panel">
+      <span class="lbl">{{ t.dealer }}</span>
+      <label class="fld" style="border-color:var(--acc)"><input value="{{ xdDealer }}" onChange="{{ onXdDealer }}" aria-label="{{ t.dealer }}" style="font-weight:700"></label>
+      <span class="lbl" style="margin-top:8px">{{ t.xdPlayers }}</span>
+      <sc-for list="{{ xdSetupNames }}" as="p" hint-placeholder-count="4">
+        <div class="fld">
+          <span class="u" style="width:40px;padding:0;text-align:center">{{ p.n }}</span>
+          <input value="{{ p.value }}" onChange="{{ p.onChange }}" placeholder="{{ t.addPh }}" aria-label="{{ t.addPh }}" style="padding-left:0">
+          <button type="button" onClick="{{ p.onRemove }}" aria-label="{{ t.remove }}" style="width:48px;height:100%;border:none;background:transparent;display:grid;place-items:center"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M5 5l10 10"></path><path d="M15 5 5 15"></path></svg></button>
+        </div>
+      </sc-for>
+      <button type="button" onClick="{{ xdSetupAdd }}" class="pill" style="border-style:dashed;color:var(--acc)">+ {{ t.addP }}</button>
+    </div>
+    <div class="panel">
+      <span class="lbl">{{ t.bet }}</span>
+      <div class="seg">
+        <sc-for list="{{ xdBetChips }}" as="u" hint-placeholder-count="4">
+          <button type="button" onClick="{{ u.onClick }}" style="background:{{ u.bg }};color:{{ u.fg }}">{{ u.label }}</button>
+        </sc-for>
+      </div>
+      <label class="fld"><input inputmode="numeric" value="{{ xdBetInput }}" onChange="{{ onXdBet }}" onFocus="{{ selectAll }}" class="num" style="font:800 22px/1 'Fraunces',serif" aria-label="{{ t.bet }}"><span class="u">đ</span></label>
+    </div>
+    <div class="panel">
+      <span class="lbl">{{ t.rules }}</span>
+      <span style="font-size:15px;text-wrap:pretty">{{ t.xdRule }}</span>
+    </div>
+  </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isXd }}" hint-placeholder-val="{{ false }}">
+<div class="scr" data-screen-label="Xi dach board">
+  <div class="top">
+    <button type="button" onClick="{{ goHome }}" class="ib" aria-label="{{ t.home }}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+    <div class="ttl"><h1 class="h" style="font-size:24px">{{ t.xd }}</h1><span style="color:var(--mut);font-size:14px">{{ t.rack }} {{ xdRound }}</span></div>
+    <button type="button" onClick="{{ undo }}" disabled="{{ cantUndo }}" class="pill">↶ {{ t.undo }}</button>
+    <button type="button" onClick="{{ xdDone }}" class="pill">✓ {{ t.doneRound }}</button>
+    <button type="button" onClick="{{ xdFinish }}" class="pill acc">{{ t.finish }}</button>
+  </div>
+  <div class="side">
+    <div class="ivc" style="align-self:start">
+      <span class="lbl" style="color:#8a2a21">{{ t.dealer }}</span>
+      <span class="h" style="font-size:28px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ xdDealer }}</span>
+      <span class="big" style="font-size:clamp(44px,5vw,60px);color:{{ xdDealerColor }}">{{ xdDealerTotal }}</span>
+      <span class="num" style="font-weight:600;font-size:14px;color:var(--inkmut)">{{ t.thisRound }} {{ xdDealerRnd }}</span>
+      <sc-if value="{{ hasXdGone }}" hint-placeholder-val="{{ false }}">
+        <span class="lbl" style="margin-top:10px">{{ t.gonePl }}</span>
+        <sc-for list="{{ xdGoneRows }}" as="g" hint-placeholder-count="2">
+          <div style="display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid #d8ccb0">
+            <span style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ g.name }}</span>
+            <span class="num" style="font-weight:700">{{ g.bal }}</span>
+          </div>
+        </sc-for>
+      </sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;min-height:0">
+      <div class="list" style="flex:1">
+        <sc-for list="{{ xdRows }}" as="p" hint-placeholder-count="4">
+          <div class="panel" style="flex-direction:row;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 14px 12px 20px;border-radius:26px">
+            <div style="flex:1 1 160px;min-width:0;display:flex;flex-direction:column;gap:4px">
+              <span class="h" style="font-size:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.name }}</span>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span class="big" style="font-size:24px;letter-spacing:-.02em;color:{{ p.balColor }}">{{ p.bal }}</span>
+                <sc-if value="{{ p.hasRnd }}" hint-placeholder-val="{{ false }}"><span class="tag num">{{ p.rnd }}</span></sc-if>
+              </div>
+            </div>
+            <div class="ctl">
+              <button type="button" onClick="{{ p.onMinus }}" class="ib" style="width:52px;height:52px" aria-label="{{ p.minusLabel }}">−</button>
+              <label class="fld" style="width:132px;height:52px"><input inputmode="numeric" value="{{ p.bet }}" onChange="{{ p.onBet }}" onFocus="{{ selectAll }}" aria-label="{{ p.betLabel }}" class="num" style="font:800 18px/1 'Fraunces',serif;padding-right:4px"><span class="u">đ</span></label>
+              <button type="button" onClick="{{ p.onPlus }}" class="ib acc" style="width:52px;height:52px" aria-label="{{ p.plusLabel }}">+</button>
+              <button type="button" onClick="{{ p.onRemove }}" class="ib" style="width:44px;height:44px" aria-label="{{ p.removeLabel }}" title="{{ p.removeLabel }}"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M5 5l10 10"></path><path d="M15 5 5 15"></path></svg></button>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ noXdPlayers }}" hint-placeholder-val="{{ false }}"><p class="note" style="margin:6px 4px">{{ t.noPl }}</p></sc-if>
+      </div>
+      <div style="display:flex;gap:8px;flex:none">
+        <label class="fld" style="flex:1;border-radius:999px"><input value="{{ xdNew }}" onChange="{{ onXdNew }}" placeholder="{{ t.addPh }}" aria-label="{{ t.addPh }}" style="padding-left:20px"></label>
+        <button type="button" onClick="{{ xdAdd }}" class="pill iv" style="height:52px;opacity:{{ xdAddOpacity }}">+ {{ t.addP }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isXdResult }}" hint-placeholder-val="{{ false }}">
+<div class="scr" data-screen-label="Xi dach summary">
+  <div class="top">
+    <button type="button" onClick="{{ xdBack }}" class="ib" aria-label="{{ t.cont }}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+    <div class="ttl"><h1 class="h" style="font-size:28px">{{ t.summary }}</h1><span style="color:var(--mut);font-size:14px">{{ xdRoundsDone }}</span></div>
+    <button type="button" onClick="{{ xdBack }}" class="pill">{{ t.cont }}</button>
+    <button type="button" onClick="{{ xdClose }}" class="pill acc">{{ t.close }}</button>
+  </div>
+  <div class="body">
+  <div class="side" style="padding:0">
+    <div class="ivc" style="align-self:start">
+      <span class="lbl" style="color:#8a2a21">{{ t.dealer }}</span>
+      <span class="h" style="font-size:28px">{{ xdDealer }}</span>
+      <span class="big" style="font-size:clamp(44px,5vw,60px);color:{{ xdDealerColor }}">{{ xdDealerTotal }}</span>
+      <span style="font-size:14px;color:var(--inkmut)">{{ xdDealerNote }}</span>
+    </div>
+    <div class="panel">
+      <span class="lbl">{{ t.whoPays }}</span>
+      <sc-for list="{{ xdSettle }}" as="r" hint-placeholder-count="4">
+        <div class="row" style="background:var(--bg);justify-content:space-between">
+          <span style="font-weight:600;min-width:0">{{ r.text }}</span>
+          <span class="big" style="font-size:26px;letter-spacing:-.02em;color:{{ r.color }}">{{ r.amt }}</span>
+        </div>
+      </sc-for>
+      <sc-if value="{{ xdNoOne }}" hint-placeholder-val="{{ false }}"><span class="note">{{ t.even }}</span></sc-if>
+    </div>
+  </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isHistory }}" hint-placeholder-val="{{ false }}">
+<div class="scr" data-screen-label="History">
+  <div class="top">
+    <button type="button" onClick="{{ goHome }}" class="ib" aria-label="{{ t.home }}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+    <div class="ttl"><h1 class="h" style="font-size:28px">{{ t.history }}</h1><span style="color:var(--mut);font-size:14px">{{ historyCount }}</span></div>
+  </div>
+  <div class="body">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:10px">
+    <sc-for list="{{ historyRows }}" as="h" hint-placeholder-count="4">
+      <div class="row">
+        <span class="chip">{{ h.when }}</span>
+        <span style="flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px">
+          <span style="font-weight:700">{{ h.result }}</span>
+          <span style="font-size:13px;color:var(--mut)">{{ h.game }}</span>
+        </span>
+        <span class="num" style="font-size:14px;color:var(--mut)">{{ t.duration }} {{ h.dur }}</span>
+        <span class="num" style="font-size:14px;font-weight:700">{{ h.bill }}</span>
+      </div>
+    </sc-for>
+    <sc-if value="{{ noHistory }}" hint-placeholder-val="{{ false }}"><p class="note" style="margin:6px 0 0">{{ t.empty }}</p></sc-if>
+  </div>
+  </div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;felt&quot;,&quot;navy&quot;,&quot;wine&quot;],&quot;default&quot;:&quot;felt&quot;,&quot;tsType&quot;:&quot;'felt'|'navy'|'wine'&quot;},&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vi&quot;,&quot;en&quot;],&quot;default&quot;:&quot;vi&quot;,&quot;tsType&quot;:&quot;'vi'|'en'&quot;},&quot;breakRule&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;alt&quot;,&quot;winner&quot;],&quot;default&quot;:&quot;alt&quot;,&quot;tsType&quot;:&quot;'alt'|'winner'&quot;,&quot;section&quot;:&quot;Pool&quot;}}">
+const T = {
+  vi: { brand: 'Bảng điểm', pool: 'Pool đối kháng', poolSub: '2 người hoặc 2 đội · chạm N ván', den: 'Đánh đền', denSub: '3 người · bảng −6 → +6 · tính tiền tuỳ chọn', history: 'Lịch sử', seeAll: 'Xem tất cả', empty: 'Chưa có trận nào.', resume: 'Tiếp tục', players: 'Người chơi / đội', order: 'Người chơi', raceTo: 'Chạm', rack: 'Ván', raceNote: 'Ai thắng đủ số ván trước là thắng trận.', money: 'Tính tiền', perPoint: 'Tiền mỗi điểm', on: 'Bật', off: 'Tắt', rate: 'Giá bàn / giờ', split: 'Tiền bàn', equal: 'Chia đều', loser: 'Người thua trả', start: 'Bắt đầu', undo: 'Hoàn tác', breakTag: 'Khai cuộc', swap: 'Đổi khai cuộc', tapHint: 'Chạm để +1 ván', winner: 'Chiến thắng', rematch: 'Đấu lại', home: 'Kết thúc, về trang chủ', finish: 'Kết thúc', sum: 'Tổng', summary: 'Tổng kết', whoPays: 'Ai trả ai', even: 'Hoà — không ai trả ai.', cont: 'Chơi tiếp', close: 'Chốt sổ', bill: 'Tiền bàn', duration: 'Giờ chơi', when: 'Thời gian', game: 'Trận', result: 'Kết quả', last: 'Vừa', denNote: 'Mỗi người bắt đầu 0 điểm. Chạm ô +N / −N để cộng hoặc trừ điểm cho người đó. Nếu tổng điểm không bằng 0, bảng sẽ cảnh báo. Có thể đổi người giữa chừng.', standing: 'Xếp hạng', pays: 'trả', each: 'mỗi người', matches: 'trận', pt: 'điểm', custom: 'Tự nhập', customPh: 'VD 15.000', endRack: 'Hết ván', racksDone: 'ván đã xong', swapP: 'Đổi người', seat: 'Ghế', newName: 'Tên người vào thay', confirm: 'Xác nhận', cancel: 'Huỷ', askPay: 'Chọn người đền', askGet: 'Chọn người nhận', paysV: 'đền', getsV: 'nhận', suggested: 'Người đánh trước', suggestedNext: 'Người kế tiếp', other: 'Người còn lại', left: 'đã rời', billAuto: 'Theo giờ', useAuto: 'Dùng tiền theo giờ', choose: 'Chọn trò chơi', xd: 'Xì dách', xdSub: '1 chủ xị · nhiều người chơi · tính tiền thắng thua', dealer: 'Chủ xị', xdPlayers: 'Người chơi', addP: 'Thêm người', addPh: 'Tên người chơi', bet: 'Tiền cược mặc định', betP: 'Tiền cược', rules: 'Cách tính', xdRule: 'Người chơi thắng: bấm + (chủ xị trả tiền cược). Người chơi thua: bấm − (mất tiền cược cho chủ xị). Mỗi người có ô tiền cược riêng, sửa được trước khi bấm. Loại người chơi vẫn giữ số tiền nợ / được để tính khi kết thúc.', doneRound: 'Xong ván', thisRound: 'Ván này', gonePl: 'Đã nghỉ · giữ tiền', remove: 'Loại', xdPaysDealer: 'trả chủ xị', dealerPays: 'Chủ xị trả', square: 'hoà', xdUp: 'đang lời', xdDown: 'đang lỗ', noPl: 'Chưa có người chơi. Thêm người ở dưới.' },
+  en: { brand: 'Scoreboard', pool: 'Pool head-to-head', poolSub: '2 players or teams · race to N racks', den: 'Đánh đền', denSub: '3 players · −6 → +6 boards · optional money', history: 'History', seeAll: 'See all', empty: 'No matches yet.', resume: 'Resume', players: 'Players / teams', order: 'Players', raceTo: 'Race to', rack: 'Rack', raceNote: 'First to win that many racks takes the match.', money: 'Money', perPoint: 'Amount per point', on: 'On', off: 'Off', rate: 'Table rate / hour', split: 'Table bill', equal: 'Split evenly', loser: 'Loser pays', start: 'Start', undo: 'Undo', breakTag: 'Break', swap: 'Swap break', tapHint: 'Tap to win a rack', winner: 'Winner', rematch: 'Rematch', home: 'End, back home', finish: 'Finish', sum: 'Sum', summary: 'Summary', whoPays: 'Who pays whom', even: 'All square — nobody pays.', cont: 'Keep playing', close: 'Close out', bill: 'Table bill', duration: 'Duration', when: 'When', game: 'Game', result: 'Result', last: 'Last', denNote: 'Everyone starts at 0. Tap +N / −N to add or subtract points for that player. You get a warning if the scores do not sum to 0. Players can be swapped mid-game.', standing: 'Standings', pays: 'pays', each: 'each', matches: 'matches', pt: 'pts', custom: 'Custom', customPh: 'e.g. 15.000', endRack: 'End rack', racksDone: 'racks done', swapP: 'Swap player', seat: 'Seat', newName: 'Incoming player name', confirm: 'Confirm', cancel: 'Cancel', askPay: 'Who pays?', askGet: 'Who receives?', paysV: 'pays', getsV: 'gets', suggested: 'Previous shooter', suggestedNext: 'Next shooter', other: 'Other player', left: 'left', billAuto: 'By the hour', useAuto: 'Use hourly bill', choose: 'Pick a game', xd: 'Xì dách', xdSub: '1 dealer · any number of players · win/loss money', dealer: 'Dealer', xdPlayers: 'Players', addP: 'Add player', addPh: 'Player name', bet: 'Default bet', betP: 'Bet', rules: 'How it works', xdRule: 'Player wins: tap + (the dealer pays the bet). Player loses: tap − (the bet goes to the dealer). Each player has their own bet box, editable before tapping. Removed players keep what they owe or are owed until the end.', doneRound: 'Round done', thisRound: 'This round', gonePl: 'Left · balance kept', remove: 'Remove', xdPaysDealer: 'pays the dealer', dealerPays: 'Dealer pays', square: 'even', xdUp: 'is up', xdDown: 'is down', noPl: 'No players yet. Add one below.' },
+};
+const vnd = n => Math.round(n).toLocaleString('vi-VN') + 'đ';
+const signed = n => (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n);
+const short = u => u / 1000 + 'k';
+const dur = ms => { const s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60; return h + ':' + String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
+const CELLS = [1, 2, 3, 4, 5, 6, -1, -2, -3, -4, -5, -6];
+const sv = n => (n > 0 ? '+' : n < 0 ? '−' : '') + vnd(Math.abs(n));
+const num = v => parseInt(String(v || '').replace(/\D/g, ''), 10) || 0;
+const fmt = n => n ? n.toLocaleString('vi-VN') : '';
+const uid = () => Math.random().toString(36).slice(2, 9);
+
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    let v = null; try { v = new URLSearchParams(location.search).get('v'); } catch (e) {}
+    this.v = v || this.props.variant || 'felt';
+    this.key = 'bida-v2-' + ({ felt: 'grid', navy: 'night', wine: 'poster' }[this.v] || this.v);
+    this.state = {
+      screen: 'home', mode: 'pool', lang: this.props.lang || 'vi', live: null,
+      names2: ['Đội A', 'Đội B'], names3: ['Minh', 'Hùng', 'Tuấn'], race: 7,
+      scores: [0, 0], breaker: 0, winner: null,
+      pts: [0, 0, 0], last: [null, null, null], moneyOn: false, unit: 10000, unitCustom: '', denRack: 1, gone: [], joinAt: [0, 0, 0], carry: [0, 0, 0], pending: null, sub: null, billOverride: '',
+      rate: 60000, split: 'equal', tStart: null, tAcc: 0,
+      xdDealer: 'Nam', xdNames: ['Minh', 'Hùng', 'Tuấn', 'Long'], xdBet: 20000, xdPlayers: [], xdGone: [], xdRound: 1, xdNew: '',
+      hist: [], history: [],
+    };
+  }
+  componentDidMount() {
+    try { const s = JSON.parse(localStorage.getItem(this.key)); if (s) { this.setState({ ...s, hist: [], pending: null, sub: null }); } } catch (e) {}
+    this.tick = setInterval(() => { if (this.state.tStart) this.forceUpdate(); }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.tick); }
+  componentDidUpdate() { try { const { hist, ...rest } = this.state; localStorage.setItem(this.key, JSON.stringify(rest)); } catch (e) {} }
+  snap() { const { scores, breaker, winner, pts, last, history, denRack, names3, gone, joinAt, carry, xdPlayers, xdGone, xdRound } = this.state; return { scores, breaker, winner, pts, last, history, denRack, names3, gone, joinAt, carry, xdPlayers, xdGone, xdRound }; }
+  xdInit() { const s = this.state; return { xdPlayers: s.xdNames.map(n => n.trim()).filter(Boolean).map(name => ({ id: uid(), name, bal: 0, rnd: 0, bet: fmt(s.xdBet) })), xdGone: [], xdRound: 1, xdNew: '' }; }
+  xdAll() { const s = this.state; return [...s.xdPlayers.map(p => ({ name: p.name, bal: p.bal })), ...s.xdGone]; }
+  xdMove(id, sign) { const s = this.state; const xdPlayers = s.xdPlayers.map(p => { if (p.id !== id) return p; const amt = num(p.bet) || s.xdBet; return { ...p, bal: p.bal + sign * amt, rnd: p.rnd + sign * amt }; }); this.commit({ xdPlayers }); }
+  xdAdd() { const s = this.state, name = s.xdNew.trim(); if (!name) return; this.commit({ xdPlayers: [...s.xdPlayers, { id: uid(), name, bal: 0, rnd: 0, bet: fmt(s.xdBet) }] }); this.setState({ xdNew: '' }); }
+  xdRemove(id) { const s = this.state, p = s.xdPlayers.find(x => x.id === id); if (!p) return; this.commit({ xdPlayers: s.xdPlayers.filter(x => x.id !== id), xdGone: p.bal ? [...s.xdGone, { name: p.name, bal: p.bal }] : s.xdGone }); }
+  commit(patch) { const snap = this.snap(); this.setState(s => ({ ...patch, hist: [...s.hist.slice(-80), snap] })); }
+  undo() { const h = this.state.hist; if (h.length) this.setState({ ...h[h.length - 1], hist: h.slice(0, -1), pending: null }); }
+  ms() { const s = this.state; return s.tAcc + (s.tStart ? Date.now() - s.tStart : 0); }
+  billAuto() { return Math.round(this.state.rate * this.ms() / 3600000 / 1000) * 1000; }
+  bill() { const o = parseInt((this.state.billOverride || '').replace(/\D/g, ''), 10); return isNaN(o) ? this.billAuto() : o; }
+  people() { const s = this.state, ms = this.ms(), c = s.carry || [0, 0, 0]; return [...s.names3.map((name, i) => ({ name, p: s.pts[i] + c[i], played: ms - s.joinAt[i], gone: false })), ...s.gone.map(g => ({ ...g, gone: true }))]; }
+  when() { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0') + ' ' + d.getDate() + '/' + (d.getMonth() + 1); }
+  record(game, result) { return [{ when: this.when(), game, result, dur: dur(this.ms()), bill: vnd(this.bill()) }, ...this.state.history].slice(0, 50); }
+
+  start() { this.setState({ screen: this.state.mode, live: this.state.mode, scores: [0, 0], breaker: 0, winner: null, pts: [0, 0, 0], last: [null, null, null], denRack: 1, gone: [], joinAt: [0, 0, 0], carry: [0, 0, 0], pending: null, sub: null, billOverride: '', tStart: Date.now(), tAcc: 0, hist: [], ...(this.state.mode === 'xd' ? this.xdInit() : {}) }); }
+  stopAll(extra) { this.setState({ screen: 'home', live: null, winner: null, tStart: null, tAcc: 0, hist: [], billOverride: '', gone: [], joinAt: [0, 0, 0], carry: [0, 0, 0], pending: null, ...extra }); }
+  tap(i) {
+    const s = this.state; if (s.winner != null) return;
+    const scores = [...s.scores]; scores[i]++;
+    const breaker = (this.props.breakRule ?? 'alt') === 'winner' ? i : 1 - s.breaker;
+    const winner = scores[i] >= s.race ? i : null;
+    const patch = { scores, breaker, winner };
+    if (winner != null) patch.history = this.record(`Pool · ${s.names2[0]} – ${s.names2[1]}`, `${s.names2[i]} ${scores[i]}–${scores[1 - i]}`);
+    this.commit(patch);
+  }
+  minus(i) { const s = this.state; if (!s.scores[i]) return; const scores = [...s.scores]; scores[i]--; this.commit({ scores, winner: null }); }
+  add(i, d) { const s = this.state; const pts = [...s.pts], last = [null, null, null]; pts[i] += d; last[i] = d; this.commit({ pts, last, pending: null }); }
+  pay(j) { const s = this.state, pd = s.pending; if (!pd) return; const pts = [...s.pts], last = [null, null, null]; pts[pd.i] += pd.d; pts[j] -= pd.d; last[pd.i] = pd.d; last[j] = -pd.d; this.commit({ pts, last, pending: null }); }
+  confirmSub() { const s = this.state, sb = s.sub; if (!sb || !sb.name.trim()) return; const i = sb.i, ms = this.ms();
+    const names3 = [...s.names3], joinAt = [...s.joinAt], carry = (s.carry || [0, 0, 0]).map((c, k) => c + s.pts[k]);
+    const gone = [...s.gone, { name: names3[i], p: carry[i], played: ms - joinAt[i] }];
+    names3[i] = sb.name.trim(); carry[i] = 0; joinAt[i] = ms;
+    this.commit({ names3, pts: [0, 0, 0], carry, joinAt, last: [null, null, null], gone, sub: null }); }
+  settle() {
+    const a = this.people().map((x, i) => ({ i, p: x.p }));
+    const deb = a.filter(x => x.p < 0).map(x => ({ i: x.i, p: -x.p })), cred = a.filter(x => x.p > 0).map(x => ({ ...x }));
+    const out = [];
+    for (const d of deb) for (const c of cred) { const m = Math.min(d.p, c.p); if (m > 0) { out.push({ from: d.i, to: c.i, amt: m }); d.p -= m; c.p -= m; } }
+    return out;
+  }
+
+  renderVals() {
+    const s = this.state, t = T[s.lang] || T.vi, isPoolMode = s.mode === 'pool', names = isPoolMode ? s.names2 : s.names3;
+    const on = a => ({ bg: a ? 'var(--acc)' : 'transparent', fg: a ? 'var(--onacc)' : 'var(--fg)' });
+    const setName = (i, v) => this.setState(st => { const k = isPoolMode ? 'names2' : 'names3'; const arr = [...st[k]]; arr[i] = v; return { [k]: arr }; });
+    const ms = this.ms(), billN = this.bill(), billA = this.billAuto(), people = this.people(), pd = s.pending;
+    const ptsLabel = n => s.moneyOn ? vnd(n * s.unit) : `${n} ${t.pt}`;
+    const settle = this.settle();
+    const ranked = people.map((x, i) => ({ ...x, i })).sort((a, b) => b.p - a.p);
+    const lowest = ranked[ranked.length - 1];
+    const label = x => x.name;
+    const totalPlayed = people.reduce((a, x) => a + Math.max(x.played, 1), 0);
+    const split = (total, weights) => { const sum = weights.reduce((a, b) => a + b, 0) || 1; const u = total % 1000 === 0 ? 1000 : total % 500 === 0 ? 500 : 1; const units = total / u; const raw = weights.map(w => units * w / sum); const out = raw.map(Math.floor); let rem = units - out.reduce((a, b) => a + b, 0); raw.map((r, i) => ({ i, f: r - Math.floor(r) })).sort((a, b) => b.f - a.f).forEach(x => { if (rem > 0) { out[x.i]++; rem--; } }); return out.map(n => n * u); };
+    const evenShares = split(billN, people.map(x => Math.max(x.played, 1)));
+    const billShares = s.split === 'loser'
+      ? people.map((x, i) => ({ name: label(x), amt: i === lowest.i ? vnd(billN) : vnd(0) }))
+      : people.map((x, i) => ({ name: label(x), amt: vnd(evenShares[i]) }));
+    const parseBill = e => { const n = parseInt(e.target.value.replace(/\D/g, ''), 10); this.setState({ billOverride: isNaN(n) ? '' : n.toLocaleString('vi-VN') }); };
+    const loserPool = s.winner != null ? s.names2[1 - s.winner] : '';
+    const xdAll = this.xdAll(), xdDealerBal = -xdAll.reduce((a, x) => a + x.bal, 0), xdRnd = -s.xdPlayers.reduce((a, p) => a + p.rnd, 0);
+    const xdPlayed = s.xdRound - 1 + (s.xdPlayers.some(p => p.rnd) ? 1 : 0);
+    return {
+      variant: this.v, t,
+      isHome: s.screen === 'home', isSetup: s.screen === 'setup' && s.mode !== 'xd', isXdSetup: s.screen === 'setup' && s.mode === 'xd', isXd: s.screen === 'xd', isXdResult: s.screen === 'xdResult', isPool: s.screen === 'pool', isDen: s.screen === 'den', isResult: s.screen === 'result', isHistory: s.screen === 'history',
+      isPoolMode, isDenMode: !isPoolMode,
+      langOpts: ['vi', 'en'].map(l => ({ label: l.toUpperCase(), onClick: () => this.setState({ lang: l }), ...on(s.lang === l) })),
+      hasLive: !!s.live,
+      liveLabel: s.live === 'pool' ? `${s.names2[0]} ${s.scores[0]} – ${s.scores[1]} ${s.names2[1]}` : s.live === 'xd' ? `${t.xd} · ${t.dealer} ${s.xdDealer} ${sv(xdDealerBal)}` : s.names3.map((n, i) => `${n} ${signed(s.pts[i])}`).join(' · '),
+      resume: () => this.setState({ screen: s.live }),
+      pickPool: () => this.setState({ screen: 'setup', mode: 'pool' }),
+      pickDen: () => this.setState({ screen: 'setup', mode: 'den' }),
+      pickXd: () => this.setState({ screen: 'setup', mode: 'xd' }),
+      xdDealer: s.xdDealer, onXdDealer: e => this.setState({ xdDealer: e.target.value }),
+      xdSetupNames: s.xdNames.map((v, i) => ({ n: i + 1, value: v, onChange: e => { const val = e.target.value; this.setState(st => { const a = [...st.xdNames]; a[i] = val; return { xdNames: a }; }); }, onRemove: () => this.setState(st => ({ xdNames: st.xdNames.filter((_, k) => k !== i) })) })),
+      xdSetupAdd: () => this.setState(st => ({ xdNames: [...st.xdNames, ''] })),
+      xdBetChips: [10000, 20000, 50000, 100000].map(u => ({ label: short(u), onClick: () => this.setState({ xdBet: u }), ...on(s.xdBet === u) })),
+      xdBetInput: fmt(s.xdBet), onXdBet: e => this.setState({ xdBet: num(e.target.value) }),
+      xdRound: s.xdRound, xdRoundsDone: `${xdPlayed} ${t.racksDone}`,
+      xdDealerTotal: sv(xdDealerBal), xdDealerRnd: sv(xdRnd), xdDealerColor: xdDealerBal < 0 ? 'var(--inkmut)' : 'var(--ink)',
+      xdRows: s.xdPlayers.map(p => ({
+        name: p.name, bal: sv(p.bal), balColor: p.bal < 0 ? 'var(--mut)' : 'var(--fg)',
+        hasRnd: !!p.rnd, rnd: `${t.thisRound} ${sv(p.rnd)}`, bet: p.bet, betLabel: `${t.betP} ${p.name}`,
+        onBet: e => { const v = fmt(num(e.target.value)); this.setState(st => ({ xdPlayers: st.xdPlayers.map(x => x.id === p.id ? { ...x, bet: v } : x) })); },
+        onPlus: () => this.xdMove(p.id, 1), onMinus: () => this.xdMove(p.id, -1), onRemove: () => this.xdRemove(p.id),
+        plusLabel: `+ ${p.name}`, minusLabel: `− ${p.name}`, removeLabel: `${t.remove} ${p.name}`,
+      })),
+      noXdPlayers: !s.xdPlayers.length,
+      hasXdGone: s.xdGone.length > 0, xdGoneRows: s.xdGone.map(g => ({ name: g.name, bal: sv(g.bal) })),
+      xdNew: s.xdNew, onXdNew: e => this.setState({ xdNew: e.target.value }), xdAdd: () => this.xdAdd(), xdAddOpacity: s.xdNew.trim() ? 1 : 0.45,
+      xdDone: () => this.commit({ xdRound: s.xdRound + 1, xdPlayers: s.xdPlayers.map(p => ({ ...p, rnd: 0 })) }),
+      xdFinish: () => this.setState({ screen: 'xdResult' }),
+      xdBack: () => this.setState({ screen: 'xd' }),
+      xdSettle: xdAll.filter(x => x.bal).map(x => ({ text: x.bal < 0 ? `${x.name} ${t.xdPaysDealer}` : `${t.dealerPays} ${x.name}`, amt: vnd(Math.abs(x.bal)), color: x.bal < 0 ? 'var(--acc)' : 'var(--fg)' })),
+      xdNoOne: !xdAll.some(x => x.bal),
+      xdDealerNote: xdDealerBal > 0 ? `${s.xdDealer} ${t.xdUp} ${vnd(xdDealerBal)}` : xdDealerBal < 0 ? `${s.xdDealer} ${t.xdDown} ${vnd(-xdDealerBal)}` : t.even,
+      xdClose: () => this.stopAll({ xdPlayers: [], xdGone: [], xdRound: 1, history: [{ when: this.when(), game: `${t.xd} · ${xdPlayed} ${t.rack.toLowerCase()} · ${t.dealer} ${s.xdDealer}`, result: [`${s.xdDealer} ${sv(xdDealerBal)}`, ...xdAll.map(x => `${x.name} ${sv(x.bal)}`)].join(' · '), dur: dur(ms), bill: '—' }, ...s.history].slice(0, 50) }),
+      goHome: () => this.setState({ screen: 'home' }),
+      openHistory: () => this.setState({ screen: 'history' }),
+      hasHistory: s.history.length > 0, noHistory: !s.history.length,
+      recent: s.history.slice(0, 4), historyRows: s.history, historyCount: `${s.history.length} ${t.matches}`,
+      setupTitle: isPoolMode ? t.pool : t.den, namesLabel: isPoolMode ? t.players : t.order,
+      setupNames: names.map((v, i) => ({ n: i + 1, value: v, onChange: e => setName(i, e.target.value) })),
+      race: s.race,
+      raceDec: () => this.setState(st => ({ race: Math.max(1, st.race - 1) })),
+      raceInc: () => this.setState(st => ({ race: Math.min(21, st.race + 1) })),
+      moneyOn: s.moneyOn,
+      moneyOpts: [[false, t.off], [true, t.on]].map(([v, label]) => ({ label, onClick: () => this.setState({ moneyOn: v }), ...on(s.moneyOn === v) })),
+      unitChips: [5000, 10000, 20000, 50000].map(u => ({ label: short(u), onClick: () => this.setState({ unit: u, unitCustom: '' }), ...on(!s.unitCustom && s.unit === u) })),
+      unitCustom: s.unitCustom, customBorder: s.unitCustom ? 'var(--acc)' : 'var(--line)',
+      onCustom: e => { const n = parseInt(e.target.value.replace(/\D/g, ''), 10) || 0; this.setState(st => ({ unitCustom: n ? n.toLocaleString('vi-VN') : '', unit: n || (st.unitCustom ? 10000 : st.unit) })); },
+      denRack: s.denRack, racksDone: (s.denRack - 1) + ' ' + t.racksDone,
+      endRack: () => this.commit({ denRack: s.denRack + 1, last: [null, null, null] }),
+      rateLabel: vnd(s.rate), rateInput: s.rate ? s.rate.toLocaleString('vi-VN') : '',
+      onRate: e => { const n = parseInt(e.target.value.replace(/\D/g, ''), 10); this.setState({ rate: isNaN(n) ? 0 : Math.min(n, 99999999) }); },
+      selectAll: e => e.target.select(),
+      rateDec: () => this.setState(st => ({ rate: Math.max(0, st.rate - 10000) })),
+      rateInc: () => this.setState(st => ({ rate: st.rate + 10000 })),
+      splitOpts: [['equal', t.equal], ['loser', t.loser]].map(([v, label]) => ({ label, onClick: () => this.setState({ split: v }), ...on(s.split === v) })),
+      start: () => this.start(),
+      undo: () => this.undo(), cantUndo: !s.hist.length, undoOpacity: s.hist.length ? 1 : 0.45,
+      running: !!s.tStart, paused: !s.tStart, elapsed: dur(ms), billLabel: vnd(billN), billTotal: vnd(billN),
+      billOverride: s.billOverride, billAutoLabel: vnd(billA).replace('đ', ''), onBill: parseBill, hasOverride: !!s.billOverride,
+      clearBill: () => this.setState({ billOverride: '' }), billBorder: s.billOverride ? 'var(--acc)' : 'var(--line)',
+      hasGone: s.gone.length > 0, goneLabel: s.gone.map(g => `${g.name} ${signed(g.p)} (${t.left})`).join(' · '),
+      pendingDelta: pd ? `${s.names3[pd.i]} ${signed(pd.d)}` : '', pendingAsk: pd ? (pd.d > 0 ? t.askPay : t.askGet) : '',
+      cancelPending: () => this.setState({ pending: null }),
+      hasSub: !!s.sub, subTitle: s.sub ? `${t.swapP} · ${t.seat} ${s.sub.i + 1}` : '',
+      subNote: s.sub ? (s.lang === 'en' ? `${s.names3[s.sub.i]} leaves with ${signed(this.people()[s.sub.i].p)} pts. The whole table resets to 0; everyone's points so far are kept for close-out.` : `${s.names3[s.sub.i]} rời bàn với ${signed(this.people()[s.sub.i].p)} điểm. Cả bàn reset về 0; điểm cũ của mọi người được giữ để tính khi chốt sổ.`) : '',
+      subName: s.sub ? s.sub.name : '', onSubName: e => { const v = e.target.value; this.setState(st => ({ sub: { ...st.sub, name: v } })); },
+      subOpacity: s.sub && s.sub.name.trim() ? 1 : 0.45,
+      cancelSub: () => this.setState({ sub: null }), confirmSub: () => this.confirmSub(),
+      toggleTimer: () => this.setState(st => st.tStart ? { tAcc: st.tAcc + Date.now() - st.tStart, tStart: null } : { tStart: Date.now() }),
+      rackNo: Math.min(s.scores[0] + s.scores[1] + 1, s.race * 2 - 1),
+      poolPanels: [0, 1].map(i => ({
+        n: i + 1, name: s.names2[i], score: s.scores[i], isBreaker: s.breaker === i,
+        pips: Array.from({ length: s.race }, (_, k) => ({ bg: k < s.scores[i] ? 'var(--fg)' : 'transparent' })),
+        onTap: () => this.tap(i), onMinus: e => { e.stopPropagation(); this.minus(i); },
+      })),
+      swapBreak: () => this.commit({ breaker: 1 - s.breaker }),
+      hasWinner: s.winner != null, winnerName: s.winner != null ? s.names2[s.winner] : '',
+      finalScore: s.winner != null ? `${s.scores[s.winner]} – ${s.scores[1 - s.winner]}` : '',
+      poolBillNote: s.split === 'loser' ? `${loserPool} ${t.pays} ${vnd(billN)}` : split(billN, [1, 1]).map((v, i) => `${s.names2[i]} ${vnd(v)}`).join(' · '),
+      rematch: () => this.setState({ scores: [0, 0], winner: null, billOverride: '', breaker: s.winner != null ? 1 - s.winner : 0, hist: [] }),
+      endPool: () => this.stopAll({ scores: [0, 0] }),
+      denCols: s.names3.map((name, i) => ({
+        n: i + 1, name, pts: signed(s.pts[i]), money: s.moneyOn ? (s.pts[i] < 0 ? '−' : s.pts[i] > 0 ? '+' : '') + vnd(Math.abs(s.pts[i] * s.unit)) : '',
+        ptsColor: s.pts[i] < 0 ? 'var(--mut)' : 'var(--fg)',
+        hasLast: s.last[i] != null, last: s.last[i] != null ? signed(s.last[i]) : '',
+        hasCarry: !!(s.carry || [0, 0, 0])[i], carryLabel: `${t.sum} ${signed(people[i].p)}`,
+        onSub: () => this.setState({ sub: { i, name: '' }, pending: null }),
+        showCells: !pd, isPending: !!pd && pd.i === i, isPayer: !!pd && pd.i !== i,
+        payHint: pd ? (i === (pd.d > 0 ? (pd.i + 2) % 3 : (pd.i + 1) % 3) ? (pd.d > 0 ? t.suggested : t.suggestedNext) : t.other) : '',
+        payLabel: pd ? `${name} ${pd.d > 0 ? t.paysV : t.getsV} ${Math.abs(pd.d)}` : '',
+        payBg: pd && i === (pd.d > 0 ? (pd.i + 2) % 3 : (pd.i + 1) % 3) ? 'var(--acc)' : 'var(--cell)',
+        payFg: pd && i === (pd.d > 0 ? (pd.i + 2) % 3 : (pd.i + 1) % 3) ? 'var(--onacc)' : 'var(--fg)',
+        onPay: () => this.pay(i),
+        cells: CELLS.map(d => ({ label: signed(d), bg: d > 0 ? 'var(--bg)' : 'var(--cell)', onClick: () => this.add(i, d) })),
+      })),
+      finishDen: () => this.setState({ screen: 'result' }),
+      backToDen: () => this.setState({ screen: 'den' }),
+      closeDen: () => this.stopAll({ pts: [0, 0, 0], last: [null, null, null], denRack: 1, history: this.record(`${t.den} · ${s.denRack - 1} ${t.rack.toLowerCase()} · ${s.names3.join(', ')}`, ranked.map(r => `${r.name} ${signed(r.p)}`).join(' · ')) }),
+      ranking: ranked.map((r, k) => ({ rank: k + 1, name: label(r), pts: signed(r.p), color: r.p < 0 ? 'var(--mut)' : 'var(--fg)' })),
+      settlements: settle.map(x => ({ from: people[x.from].name, to: people[x.to].name, amt: ptsLabel(x.amt) })),
+      noSettle: !settle.length, billShares,
+      sumOff: people.reduce((a, x) => a + x.p, 0) !== 0,
+      boardOff: s.pts.reduce((a, b) => a + b, 0) !== 0,
+      boardWarn: (() => { const n = s.pts.reduce((a, b) => a + b, 0); return s.lang === 'en' ? `Board sums to ${signed(n)}, not 0` : `Tổng điểm đang là ${signed(n)}, chưa bằng 0`; })(),
+      sumWarn: (() => { const n = people.reduce((a, x) => a + x.p, 0); return s.lang === 'en' ? `Scores sum to ${signed(n)}, not 0` : `Tổng điểm đang là ${signed(n)}, chưa bằng 0`; })(),
+    };
+  }
+}
+</script>
+</body>
+</html>

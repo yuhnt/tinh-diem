@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#080a09;color:#eef1ee;font-family:'Be Vietnam Pro',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}*{box-sizing:border-box}a{color:oklch(0.8 0.14 155)}a:hover{color:#fff}input,button{font:inherit;color:inherit}button{cursor:pointer}input:focus{outline:none}</style>
+</helmet>
+<div style="min-height:100dvh;display:flex;justify-content:center;background:#080a09">
+<div style="width:100%;max-width:440px;height:100dvh;display:flex;flex-direction:column;background:#0f1312;position:relative;overflow:hidden">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Home" style="flex:1;display:flex;flex-direction:column;padding:32px 20px 24px;gap:28px;overflow:auto">
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:14px;height:14px;border-radius:50%;background:#1b1b1b;border:1.5px solid #3a403d;display:grid;place-items:center"><div style="width:6px;height:6px;border-radius:50%;background:#f4f1e8"></div></div>
+      <span style="font:600 12px/1 'Be Vietnam Pro';letter-spacing:.16em;color:#8b958f;text-transform:uppercase">Bida · Bảng điểm</span>
+    </div>
+    <h1 style="margin:0;font:700 52px/0.95 'Barlow Condensed';text-transform:uppercase;letter-spacing:-.005em">Hôm nay<br>chơi gì?</h1>
+  </div>
+
+  <sc-if value="{{ hasLive }}" hint-placeholder-val="{{ false }}">
+    <button onClick="{{ resume }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:14px;border:1px solid oklch(0.8 0.14 155 / .4);background:oklch(0.8 0.14 155 / .1);text-align:left">
+      <div style="display:flex;flex-direction:column;gap:2px"><span style="font:600 14px/1.3 'Be Vietnam Pro'">Tiếp tục trận đang chơi</span><span style="font:400 12px/1.3 'Be Vietnam Pro';color:#8b958f">{{ liveLabel }}</span></div>
+      <span style="font:600 20px/1 'Barlow Condensed';color:oklch(0.8 0.14 155)">→</span>
+    </button>
+  </sc-if>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <button onClick="{{ pickPool }}" style="text-align:left;background:#171d1b;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:22px" style-active="transform:scale(.98)">
+      <div style="display:flex;gap:6px">
+        <div style="width:44px;height:44px;border-radius:50%;background:oklch(0.82 0.14 85);display:grid;place-items:center"><div style="width:22px;height:22px;border-radius:50%;background:#f4f1e8;display:grid;place-items:center;font:700 12px/1 'Be Vietnam Pro';color:#111">1</div></div>
+        <div style="width:44px;height:44px;border-radius:50%;background:oklch(0.55 0.14 255);display:grid;place-items:center"><div style="width:22px;height:22px;border-radius:50%;background:#f4f1e8;display:grid;place-items:center;font:700 12px/1 'Be Vietnam Pro';color:#111">2</div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font:700 30px/1 'Barlow Condensed';text-transform:uppercase">Pool đối kháng</span>
+          <span style="font:400 13px/1.4 'Be Vietnam Pro';color:#8b958f">2 người hoặc 2 đội · chạm N ván</span>
+        </div>
+        <span style="font:600 12px/1 'Be Vietnam Pro';color:#8b958f;border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:7px 10px">1 – 1</span>
+      </div>
+    </button>
+    <button onClick="{{ pickDen }}" style="text-align:left;background:#171d1b;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:22px" style-active="transform:scale(.98)">
+      <div style="display:flex;gap:6px">
+        <div style="width:44px;height:44px;border-radius:50%;background:oklch(0.6 0.18 28);display:grid;place-items:center"><div style="width:22px;height:22px;border-radius:50%;background:#f4f1e8;display:grid;place-items:center;font:700 12px/1 'Be Vietnam Pro';color:#111">3</div></div>
+        <div style="width:44px;height:44px;border-radius:50%;background:oklch(0.55 0.13 155);display:grid;place-items:center"><div style="width:22px;height:22px;border-radius:50%;background:#f4f1e8;display:grid;place-items:center;font:700 12px/1 'Be Vietnam Pro';color:#111">6</div></div>
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(#f4f1e8 0 24%,oklch(0.85 0.15 90) 24% 76%,#f4f1e8 76%);display:grid;place-items:center"><div style="width:22px;height:22px;border-radius:50%;background:#f4f1e8;display:grid;place-items:center;font:700 12px/1 'Be Vietnam Pro';color:#111">9</div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font:700 30px/1 'Barlow Condensed';text-transform:uppercase">Đánh đền</span>
+          <span style="font:400 13px/1.4 'Be Vietnam Pro';color:#8b958f">3 người · bi 3 · 6 · 9 · tính tiền</span>
+        </div>
+        <span style="font:600 12px/1 'Be Vietnam Pro';color:#8b958f;border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:7px 10px">3 người</span>
+      </div>
+    </button>
+  </div>
+
+  <sc-if value="{{ hasRecent }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font:600 11px/1 'Be Vietnam Pro';letter-spacing:.14em;color:#6b746f;text-transform:uppercase">Gần đây</span>
+      <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.06)">
+        <sc-for list="{{ recent }}" as="r" hint-placeholder-count="2">
+          <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:500 14px/1.3 'Be Vietnam Pro'">{{ r.title }}</span><span style="font:400 12px/1.3 'Be Vietnam Pro';color:#8b958f">{{ r.detail }}</span></div>
+            <span style="font:400 12px/1.3 'Be Vietnam Pro';color:#6b746f;white-space:nowrap">{{ r.time }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSetup }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Setup" style="flex:1;display:flex;flex-direction:column;min-height:0">
+  <div style="display:flex;align-items:center;gap:8px;padding:14px 12px">
+    <button onClick="{{ goHome }}" style="width:44px;height:44px;border-radius:12px;border:none;background:#171d1b;font:600 20px/1 'Barlow Condensed'">←</button>
+    <span style="font:700 22px/1 'Barlow Condensed';text-transform:uppercase">{{ setupTitle }}</span>
+  </div>
+  <div style="flex:1;overflow:auto;padding:8px 20px 24px;display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font:600 11px/1 'Be Vietnam Pro';letter-spacing:.14em;color:#6b746f;text-transform:uppercase">{{ namesLabel }}</span>
+      <sc-for list="{{ setupNames }}" as="p" hint-placeholder-count="2">
+        <label style="display:flex;align-items:center;gap:12px;background:#171d1b;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:0 14px;height:56px">
+          <span style="width:26px;height:26px;border-radius:50%;background:{{ p.color }};display:grid;place-items:center;font:700 13px/1 'Be Vietnam Pro';color:#111;flex:none">{{ p.n }}</span>
+          <input value="{{ p.value }}" onChange="{{ p.onChange }}" style="flex:1;min-width:0;background:transparent;border:none;font:500 16px/1 'Be Vietnam Pro'">
+        </label>
+      </sc-for>
+      <sc-if value="{{ isDenMode }}" hint-placeholder-val="{{ false }}">
+        <span style="font:400 12px/1.5 'Be Vietnam Pro';color:#8b958f;text-wrap:pretty">Thứ tự đánh 1 → 2 → 3. Ăn bi điểm: người đánh ngay trước đền cho mình. Phạm lỗi: mình đền cho người kế tiếp.</span>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ isPoolMode }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font:600 11px/1 'Be Vietnam Pro';letter-spacing:.14em;color:#6b746f;text-transform:uppercase">Chạm bao nhiêu ván</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:#171d1b;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:8px">
+          <button onClick="{{ raceDec }}" style="width:52px;height:52px;border-radius:10px;border:none;background:#222a27;font:600 26px/1 'Barlow Condensed'">−</button>
+          <span style="font:700 48px/1 'Barlow Condensed'">{{ race }}</span>
+          <button onClick="{{ raceInc }}" style="width:52px;height:52px;border-radius:10px;border:none;background:#222a27;font:600 26px/1 'Barlow Condensed'">+</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDenMode }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font:600 11px/1 'Be Vietnam Pro';letter-spacing:.14em;color:#6b746f;text-transform:uppercase">Điểm đền</span>
+        <div style="display:flex;flex-direction:column;background:#171d1b;border:1px solid rgba(255,255,255,.08);border-radius:14px">
+          <sc-for list="{{ valRows }}" as="v" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 8px 8px 14px;border-bottom:1px solid rgba(255,255,255,.05)">
+              <div style="width:30px;height:30px;border-radius:50%;background:{{ v.ballBg }};display:grid;place-items:center;flex:none"><div style="width:15px;height:15px;border-radius:50%;background:#f4f1e8;display:grid;place-items:center;font:700 9px/1 'Be Vietnam Pro';color:#111">{{ v.num }}</div></div>
+              <span style="flex:1;font:500 15px/1 'Be Vietnam Pro'">{{ v.label }}</span>
+              <button onClick="{{ v.dec }}" style="width:40px;height:40px;border-radius:10px;border:none;background:#222a27;font:600 22px/1 'Barlow Condensed'">−</button>
+              <span style="width:28px;text-align:center;font:700 26px/1 'Barlow Condensed'">{{ v.value }}</span>
+              <button onClick="{{ v.inc }}" style="width:40px;height:40px;border-radius:10px;border:none;background:#222a27;font:600 22px/1 'Barlow Condensed'">+</button>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font:600 11px/1 'Be Vietnam Pro';letter-spacing:.14em;color:#6b746f;text-transform:uppercase">Tiền mỗi điểm</span>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+          <sc-for list="{{ unitChips }}" as="u" hint-placeholder-count="4">
+            <button onClick="{{ u.onClick }}" style="height:48px;border-radius:12px;border:1px solid {{ u.border }};background:{{ u.bg }};font:600 15px/1 'Be Vietnam Pro'">{{ u.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+  <div style="padding:12px 20px 20px">
+    <button onClick="{{ start }}" style="width:100%;height:60px;border-radius:16px;border:none;background:oklch(0.8 0.14 155);color:#0b1210;font:700 22px/1 'Barlow Condensed';text-transform:uppercase;letter-spacing:.04em" style-active="transform:scale(.98)">Bắt đầu</button>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPool }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Pool board" style="flex:1;display:flex;flex-direction:column;min-height:0">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px">
+    <button onClick="{{ goHome }}" style="width:44px;height:44px;border-radius:12px;border:none;background:#171d1b;font:600 20px/1 'Barlow Condensed'">←</button>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+      <span style="font:700 18px/1 'Barlow Condensed';text-transform:uppercase;letter-spacing:.04em">Chạm {{ race }}</span>
+      <span style="font:400 11px/1 'Be Vietnam Pro';color:#8b958f">Ván {{ rackNo }}</span>
+    </div>
+    <button onClick="{{ undo }}" disabled="{{ cantUndo }}" style="height:44px;padding:0 14px;border-radius:12px;border:none;background:#171d1b;font:500 13px/1 'Be Vietnam Pro';opacity:{{ undoOpacity }}">↶ Hoàn tác</button>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+    <sc-for list="{{ poolPanels }}" as="p" hint-placeholder-count="2">
+      <div onClick="{{ p.onTap }}" style="flex:1;min-height:0;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;margin:0 12px 10px;border-radius:24px;background:{{ p.bg }};border:1px solid rgba(255,255,255,.06);transform:{{ p.transform }};user-select:none;cursor:pointer;overflow:hidden">
+        <div style="position:absolute;top:16px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <span style="font:600 17px/1.2 'Be Vietnam Pro';overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.name }}</span>
+          <sc-if value="{{ p.isBreaker }}" hint-placeholder-val="{{ false }}">
+            <span style="display:flex;align-items:center;gap:6px;font:600 11px/1 'Be Vietnam Pro';letter-spacing:.06em;text-transform:uppercase;color:#0f1312;background:#f4f1e8;padding:6px 9px;border-radius:99px;flex:none"><span style="width:7px;height:7px;border-radius:50%;background:#0f1312"></span>Khai cuộc</span>
+          </sc-if>
+        </div>
+        <span style="font:700 168px/0.85 'Barlow Condensed';color:{{ p.color }};font-variant-numeric:tabular-nums;letter-spacing:-.02em">{{ p.score }}</span>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:80%">
+          <sc-for list="{{ p.pips }}" as="d" hint-placeholder-count="7">
+            <span style="width:14px;height:6px;border-radius:3px;background:{{ d.bg }}"></span>
+          </sc-for>
+        </div>
+        <button onClick="{{ p.onMinus }}" style="position:absolute;bottom:14px;right:14px;width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.25);font:600 24px/1 'Barlow Condensed'">−</button>
+        <span style="position:absolute;bottom:28px;left:18px;font:400 11px/1 'Be Vietnam Pro';color:#6b746f">Chạm để +1 ván</span>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 12px 16px">
+    <button onClick="{{ swapBreak }}" style="height:48px;border-radius:14px;border:none;background:#171d1b;font:500 14px/1 'Be Vietnam Pro'">Đổi khai cuộc</button>
+    <button onClick="{{ rematch }}" style="height:48px;border-radius:14px;border:none;background:#171d1b;font:500 14px/1 'Be Vietnam Pro'">Đấu lại từ đầu</button>
+  </div>
+
+  <sc-if value="{{ hasWinner }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;background:rgba(8,10,9,.94);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;padding:24px;z-index:5">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+        <span style="font:600 12px/1 'Be Vietnam Pro';letter-spacing:.16em;color:#8b958f;text-transform:uppercase">Chiến thắng</span>
+        <span style="font:700 56px/1 'Barlow Condensed';text-transform:uppercase;color:{{ winnerColor }}">{{ winnerName }}</span>
+        <span style="font:600 32px/1 'Barlow Condensed';color:#eef1ee">{{ finalScore }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:300px">
+        <button onClick="{{ rematch }}" style="height:56px;border-radius:16px;border:none;background:oklch(0.8 0.14 155);color:#0b1210;font:700 20px/1 'Barlow Condensed';text-transform:uppercase;letter-spacing:.04em">Đấu lại</button>
+        <button onClick="{{ undo }}" style="height:48px;border-radius:14px;border:none;background:#171d1b;font:500 14px/1 'Be Vietnam Pro'">Hoàn tác ván cuối</button>
+        <button onClick="{{ newMatch }}" style="height:48px;border-radius:14px;border:none;background:transparent;font:500 14px/1 'Be Vietnam Pro';color:#8b958f">Về trang chủ</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDen }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Den board" style="flex:1;display:flex;flex-direction:column;min-height:0">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px">
+    <button onClick="{{ goHome }}" style="width:44px;height:44px;border-radius:12px;border:none;background:#171d1b;font:600 20px/1 'Barlow Condensed'">←</button>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+      <span style="font:700 18px/1 'Barlow Condensed';text-transform:uppercase;letter-spacing:.04em">Đánh đền</span>
+      <span style="font:400 11px/1 'Be Vietnam Pro';color:#8b958f">Ván {{ rack }} · {{ unitLabel }}/điểm</span>
+    </div>
+    <button onClick="{{ undo }}" disabled="{{ cantUndo }}" style="height:44px;padding:0 14px;border-radius:12px;border:none;background:#171d1b;font:500 13px/1 'Be Vietnam Pro';opacity:{{ undoOpacity }}">↶ Hoàn tác</button>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;padding:0 12px">
+    <sc-for list="{{ denRows }}" as="r" hint-placeholder-count="3">
+      <div onClick="{{ r.onTap }}" style="display:flex;align-items:center;gap:12px;padding:12px 16px 12px 12px;border-radius:18px;background:{{ r.rowBg }};border:1.5px solid {{ r.rowBorder }};cursor:pointer;transition:background .15s,border-color .15s">
+        <span style="width:34px;height:34px;border-radius:50%;background:{{ r.color }};display:grid;place-items:center;font:700 15px/1 'Be Vietnam Pro';color:#111;flex:none">{{ r.order }}</span>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+          <span style="font:600 17px/1.2 'Be Vietnam Pro';overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</span>
+          <span style="font:500 11px/1 'Be Vietnam Pro';letter-spacing:.08em;text-transform:uppercase;color:{{ r.statusColor }}">{{ r.status }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+          <span style="font:700 40px/0.9 'Barlow Condensed';color:{{ r.ptsColor }};font-variant-numeric:tabular-nums">{{ r.ptsLabel }}</span>
+          <sc-if value="{{ showMoney }}" hint-placeholder-val="{{ true }}">
+            <span style="font:500 12px/1 'Be Vietnam Pro';color:#8b958f;font-variant-numeric:tabular-nums">{{ r.money }}</span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="margin:14px 12px 0;padding:16px;border-radius:22px;background:#171d1b;border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+      <span style="font:700 22px/1 'Barlow Condensed';text-transform:uppercase">Lượt: <span style="color:{{ shooterColor }}">{{ shooterName }}</span></span>
+      <span style="font:400 12px/1.3 'Be Vietnam Pro';color:#8b958f;text-align:right">{{ prevName }} đền nếu ăn</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+      <sc-for list="{{ ballBtns }}" as="b" hint-placeholder-count="3">
+        <button onClick="{{ b.onClick }}" style="height:96px;border-radius:16px;border:none;background:#222a27;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px" style-active="transform:scale(.95);background:#2c3531">
+          <div style="width:46px;height:46px;border-radius:50%;background:{{ b.bg }};display:grid;place-items:center;box-shadow:inset -4px -6px 10px rgba(0,0,0,.25)"><div style="width:22px;height:22px;border-radius:50%;background:#f4f1e8;display:grid;place-items:center;font:700 12px/1 'Be Vietnam Pro';color:#111">{{ b.num }}</div></div>
+          <span style="font:600 14px/1 'Be Vietnam Pro'">+{{ b.value }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button onClick="{{ foul }}" style="height:52px;border-radius:14px;border:1.5px solid oklch(0.72 0.16 25 / .6);background:oklch(0.72 0.16 25 / .1);color:oklch(0.8 0.13 25);font:600 15px/1 'Be Vietnam Pro'" style-active="transform:scale(.97)">Phạm lỗi · −{{ foulVal }}</button>
+      <button onClick="{{ pass }}" style="height:52px;border-radius:14px;border:none;background:#2a332f;font:600 15px/1 'Be Vietnam Pro'" style-active="transform:scale(.97)">Qua lượt →</button>
+    </div>
+  </div>
+
+  <div style="flex:1;min-height:0;overflow:auto;padding:14px 20px 8px;display:flex;flex-direction:column">
+    <sc-if value="{{ hasLog }}" hint-placeholder-val="{{ false }}">
+      <sc-for list="{{ logItems }}" as="l" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)">
+          <span style="width:8px;height:8px;border-radius:50%;background:{{ l.color }};flex:none"></span>
+          <span style="flex:1;font:500 13px/1.3 'Be Vietnam Pro'">{{ l.text }}</span>
+          <span style="font:400 12px/1.3 'Be Vietnam Pro';color:#8b958f">{{ l.sub }}</span>
+        </div>
+      </sc-for>
+    </sc-if>
+    <sc-if value="{{ noLog }}" hint-placeholder-val="{{ true }}">
+      <span style="font:400 13px/1.5 'Be Vietnam Pro';color:#6b746f;text-align:center;padding:12px 0">Chạm vào tên để đổi người đang cơ.</span>
+    </sc-if>
+  </div>
+  <div style="padding:8px 12px 16px">
+    <button onClick="{{ finishDen }}" style="width:100%;height:52px;border-radius:14px;border:none;background:oklch(0.8 0.14 155);color:#0b1210;font:700 19px/1 'Barlow Condensed';text-transform:uppercase;letter-spacing:.04em">Kết thúc &amp; tính tiền</button>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Den result" style="flex:1;display:flex;flex-direction:column;min-height:0">
+  <div style="flex:1;overflow:auto;padding:32px 20px 16px;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font:600 12px/1 'Be Vietnam Pro';letter-spacing:.16em;color:#8b958f;text-transform:uppercase">Tổng kết · {{ rackCount }} ván</span>
+      <h1 style="margin:0;font:700 48px/0.95 'Barlow Condensed';text-transform:uppercase">Tính tiền</h1>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <sc-for list="{{ ranking }}" as="r" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:14px;padding:16px;border-radius:18px;background:#171d1b">
+          <span style="font:700 28px/1 'Barlow Condensed';color:#6b746f;width:20px">{{ r.rank }}</span>
+          <span style="width:12px;height:12px;border-radius:50%;background:{{ r.color }};flex:none"></span>
+          <span style="flex:1;font:600 17px/1.2 'Be Vietnam Pro'">{{ r.name }}</span>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font:700 26px/1 'Barlow Condensed';color:{{ r.ptsColor }}">{{ r.money }}</span>
+            <span style="font:400 12px/1 'Be Vietnam Pro';color:#8b958f">{{ r.ptsLabel }} điểm</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font:600 11px/1 'Be Vietnam Pro';letter-spacing:.14em;color:#6b746f;text-transform:uppercase">Ai trả ai</span>
+      <sc-if value="{{ hasSettle }}" hint-placeholder-val="{{ true }}">
+        <sc-for list="{{ settlements }}" as="s" hint-placeholder-count="2">
+          <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.08)">
+            <span style="font:600 15px/1.2 'Be Vietnam Pro'">{{ s.from }}</span>
+            <span style="font:600 18px/1 'Barlow Condensed';color:#6b746f">→</span>
+            <span style="flex:1;font:600 15px/1.2 'Be Vietnam Pro'">{{ s.to }}</span>
+            <span style="font:700 22px/1 'Barlow Condensed';color:oklch(0.8 0.14 155)">{{ s.amt }}</span>
+          </div>
+        </sc-for>
+      </sc-if>
+      <sc-if value="{{ noSettle }}" hint-placeholder-val="{{ false }}">
+        <span style="font:400 14px/1.4 'Be Vietnam Pro';color:#8b958f">Hoà — không ai trả ai.</span>
+      </sc-if>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;padding:12px 20px 20px">
+    <button onClick="{{ backToDen }}" style="height:56px;border-radius:16px;border:none;background:oklch(0.8 0.14 155);color:#0b1210;font:700 20px/1 'Barlow Condensed';text-transform:uppercase;letter-spacing:.04em">Chơi tiếp</button>
+    <button onClick="{{ newMatch }}" style="height:48px;border-radius:14px;border:none;background:#171d1b;font:500 14px/1 'Be Vietnam Pro'">Chốt sổ &amp; về trang chủ</button>
+  </div>
+</div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;flipTop&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Pool&quot;},&quot;breakRule&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;alt&quot;,&quot;winner&quot;],&quot;default&quot;:&quot;alt&quot;,&quot;tsType&quot;:&quot;'alt'|'winner'&quot;,&quot;section&quot;:&quot;Pool&quot;},&quot;showMoney&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Đánh đền&quot;}}">
+const C = ['oklch(0.82 0.14 85)', 'oklch(0.76 0.15 28)', 'oklch(0.78 0.13 235)'];
+const GREEN = 'oklch(0.8 0.14 155)', RED = 'oklch(0.74 0.16 25)';
+const KEY = 'bida-scoreboard-v1';
+const money = n => (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n).toLocaleString('vi-VN') + 'đ';
+const plain = n => Math.abs(n).toLocaleString('vi-VN') + 'đ';
+const short = u => (u >= 1000 ? u / 1000 + 'k' : u + 'đ');
+const BALLS = [
+  { k: 'b3', num: 3, bg: 'oklch(0.6 0.18 28)' },
+  { k: 'b6', num: 6, bg: 'oklch(0.55 0.13 155)' },
+  { k: 'b9', num: 9, bg: 'linear-gradient(#f4f1e8 0 24%,oklch(0.85 0.15 90) 24% 76%,#f4f1e8 76%)' },
+];
+
+class Component extends DCLogic {
+  state = {
+    screen: 'home', mode: 'pool', live: null,
+    names2: ['Đội A', 'Đội B'], names3: ['Minh', 'Hùng', 'Tuấn'],
+    race: 7, scores: [0, 0], breaker: 0, winner: null,
+    vals: { b3: 1, b6: 1, b9: 2, foul: 1 }, unit: 10000,
+    pts: [0, 0, 0], turn: 0, rack: 1, log: [],
+    hist: [], recent: [],
+  };
+  componentDidMount() {
+    try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) this.setState({ ...s, hist: [] }); } catch (e) {}
+  }
+  componentDidUpdate() {
+    try { const { hist, ...rest } = this.state; localStorage.setItem(KEY, JSON.stringify(rest)); } catch (e) {}
+  }
+  snap() { const { scores, breaker, winner, pts, turn, rack, log } = this.state; return { scores, breaker, winner, pts, turn, rack, log }; }
+  commit(patch) { const snap = this.snap(); this.setState(s => ({ ...patch, hist: [...s.hist.slice(-60), snap] })); }
+  undo() { const h = this.state.hist; if (!h.length) return; this.setState({ ...h[h.length - 1], hist: h.slice(0, -1) }); }
+  stamp() { const d = new Date(); return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0') + ' · ' + d.getDate() + '/' + (d.getMonth() + 1); }
+  addRecent(item) { return [{ ...item, time: this.stamp() }, ...this.state.recent].slice(0, 5); }
+
+  start() {
+    const m = this.state.mode;
+    this.setState({ screen: m, live: m, scores: [0, 0], breaker: 0, winner: null, pts: [0, 0, 0], turn: 0, rack: 1, log: [], hist: [] });
+  }
+  tap(i) {
+    const s = this.state; if (s.winner != null) return;
+    const scores = [...s.scores]; scores[i]++;
+    const breaker = (this.props.breakRule ?? 'alt') === 'winner' ? i : 1 - s.breaker;
+    const winner = scores[i] >= s.race ? i : null;
+    const patch = { scores, breaker, winner };
+    if (winner != null) patch.recent = this.addRecent({ title: `${s.names2[i]} thắng ${scores[i]}–${scores[1 - i]}`, detail: `Pool · ${s.names2[0]} vs ${s.names2[1]} · chạm ${s.race}` });
+    this.commit(patch);
+  }
+  minus(i) { const s = this.state; if (!s.scores[i]) return; const scores = [...s.scores]; scores[i]--; this.commit({ scores, winner: null }); }
+  act(k) {
+    const s = this.state, n = s.names3, v = s.vals[k], t = s.turn, prev = (t + 2) % 3, next = (t + 1) % 3;
+    const pts = [...s.pts]; let entry, turn = t, rack = s.rack;
+    if (k === 'foul') { pts[t] -= v; pts[next] += v; entry = { who: t, text: `${n[t]} phạm lỗi`, sub: `đền ${n[next]} ${v}` }; turn = next; }
+    else { pts[t] += v; pts[prev] -= v; entry = { who: t, text: `${n[t]} ăn bi ${k.slice(1)}`, sub: `${n[prev]} đền ${v}` }; if (k === 'b9') rack++; }
+    this.commit({ pts, turn, rack, log: [entry, ...s.log].slice(0, 60) });
+  }
+  settle() {
+    const a = this.state.pts.map((p, i) => ({ i, p }));
+    const deb = a.filter(x => x.p < 0).map(x => ({ i: x.i, p: -x.p })), cred = a.filter(x => x.p > 0).map(x => ({ ...x }));
+    const out = [];
+    for (const d of deb) for (const c of cred) { const m = Math.min(d.p, c.p); if (m > 0) { out.push({ from: d.i, to: c.i, amt: m }); d.p -= m; c.p -= m; } }
+    return out;
+  }
+  finishDen() {
+    const s = this.state, n = s.names3;
+    const best = s.pts.indexOf(Math.max(...s.pts));
+    this.setState({ screen: 'result', recent: this.addRecent({ title: `Đánh đền · ${n[best]} ${money(s.pts[best] * s.unit)}`, detail: `${n.join(', ')} · ${s.rack - 1} ván` }) });
+  }
+
+  renderVals() {
+    const s = this.state, flip = this.props.flipTop ?? false, showMoney = this.props.showMoney ?? true;
+    const isPoolMode = s.mode === 'pool', names = isPoolMode ? s.names2 : s.names3;
+    const setName = (i, v) => this.setState(st => { const key = isPoolMode ? 'names2' : 'names3'; const arr = [...st[key]]; arr[i] = v; return { [key]: arr }; });
+    const setVal = (k, d) => this.setState(st => ({ vals: { ...st.vals, [k]: Math.max(1, Math.min(9, st.vals[k] + d)) } }));
+    const n = s.names3, t = s.turn;
+    const rows = n.map((name, i) => ({ i, name, p: s.pts[i] }));
+    const ranked = [...rows].sort((a, b) => b.p - a.p);
+    const settlements = this.settle().map(x => ({ from: n[x.from], to: n[x.to], amt: plain(x.amt * s.unit) }));
+    return {
+      isHome: s.screen === 'home', isSetup: s.screen === 'setup', isPool: s.screen === 'pool', isDen: s.screen === 'den', isResult: s.screen === 'result',
+      isPoolMode, isDenMode: !isPoolMode, showMoney,
+      hasLive: !!s.live, liveLabel: s.live === 'pool' ? `Pool · ${s.names2[0]} ${s.scores[0]} – ${s.scores[1]} ${s.names2[1]}` : `Đánh đền · ${s.names3.join(', ')} · ván ${s.rack}`,
+      resume: () => this.setState({ screen: s.live }),
+      hasRecent: s.recent.length > 0, recent: s.recent,
+      pickPool: () => this.setState({ screen: 'setup', mode: 'pool' }),
+      pickDen: () => this.setState({ screen: 'setup', mode: 'den' }),
+      goHome: () => this.setState({ screen: 'home' }),
+      setupTitle: isPoolMode ? 'Pool đối kháng' : 'Đánh đền',
+      namesLabel: isPoolMode ? 'Người chơi / đội' : 'Thứ tự đánh',
+      setupNames: names.map((v, i) => ({ n: i + 1, value: v, color: C[i], onChange: e => setName(i, e.target.value) })),
+      race: s.race,
+      raceDec: () => this.setState(st => ({ race: Math.max(1, st.race - 1) })),
+      raceInc: () => this.setState(st => ({ race: Math.min(25, st.race + 1) })),
+      valRows: [...BALLS.map(b => ({ ...b, label: 'Ăn bi ' + b.num })), { k: 'foul', num: '!', bg: '#3a403d', label: 'Phạm lỗi' }]
+        .map(r => ({ label: r.label, num: r.num, ballBg: r.bg, value: s.vals[r.k], dec: () => setVal(r.k, -1), inc: () => setVal(r.k, 1) })),
+      unitChips: [5000, 10000, 20000, 50000].map(u => ({ label: short(u), onClick: () => this.setState({ unit: u }), bg: s.unit === u ? 'oklch(0.8 0.14 155 / .14)' : '#171d1b', border: s.unit === u ? GREEN : 'rgba(255,255,255,.08)' })),
+      start: () => this.start(),
+      undo: () => this.undo(), cantUndo: !s.hist.length, undoOpacity: s.hist.length ? 1 : 0.4,
+      rackNo: s.scores[0] + s.scores[1] + 1,
+      poolPanels: [0, 1].map(i => ({
+        name: s.names2[i], score: s.scores[i], color: C[i], isBreaker: s.breaker === i,
+        bg: s.breaker === i ? `radial-gradient(120% 90% at 50% 50%, color-mix(in oklch, ${C[i]} 14%, #151a18), #151a18)` : '#131816',
+        transform: flip && i === 0 ? 'rotate(180deg)' : 'none',
+        pips: Array.from({ length: s.race }, (_, k) => ({ bg: k < s.scores[i] ? C[i] : 'rgba(255,255,255,.12)' })),
+        onTap: () => this.tap(i), onMinus: e => { e.stopPropagation(); this.minus(i); },
+      })),
+      swapBreak: () => this.commit({ breaker: 1 - s.breaker }),
+      rematch: () => this.setState({ scores: [0, 0], winner: null, breaker: s.winner != null ? 1 - s.winner : 0, hist: [] }),
+      newMatch: () => this.setState({ screen: 'home', live: null, scores: [0, 0], winner: null, pts: [0, 0, 0], rack: 1, log: [], hist: [] }),
+      hasWinner: s.winner != null, winnerName: s.winner != null ? s.names2[s.winner] : '', winnerColor: s.winner != null ? C[s.winner] : '#fff',
+      finalScore: s.winner != null ? `${s.scores[s.winner]} – ${s.scores[1 - s.winner]}` : '',
+      rack: s.rack, unitLabel: short(s.unit),
+      denRows: rows.map(r => {
+        const active = t === r.i, nxt = r.i === (t + 1) % 3;
+        return {
+          name: r.name, order: r.i + 1, color: C[r.i],
+          rowBg: active ? `color-mix(in oklch, ${C[r.i]} 10%, #171d1b)` : '#141917', rowBorder: active ? C[r.i] : 'rgba(255,255,255,.05)',
+          status: active ? 'Đang cơ' : nxt ? 'Kế tiếp' : 'Chờ', statusColor: active ? C[r.i] : '#6b746f',
+          ptsLabel: (r.p > 0 ? '+' : r.p < 0 ? '−' : '') + Math.abs(r.p), ptsColor: r.p > 0 ? GREEN : r.p < 0 ? RED : '#eef1ee',
+          money: money(r.p * s.unit), onTap: () => this.commit({ turn: r.i }),
+        };
+      }),
+      shooterName: n[t], shooterColor: C[t], prevName: n[(t + 2) % 3],
+      ballBtns: BALLS.map(b => ({ num: b.num, bg: b.bg, value: s.vals[b.k], onClick: () => this.act(b.k) })),
+      foul: () => this.act('foul'), foulVal: s.vals.foul,
+      pass: () => this.commit({ turn: (t + 1) % 3 }),
+      hasLog: s.log.length > 0, noLog: !s.log.length,
+      logItems: s.log.map(l => ({ ...l, color: C[l.who] })),
+      finishDen: () => this.finishDen(),
+      rackCount: s.rack - 1,
+      ranking: ranked.map((r, k) => ({ rank: k + 1, name: r.name, color: C[r.i], money: money(r.p * s.unit), ptsLabel: (r.p > 0 ? '+' : '') + r.p, ptsColor: r.p > 0 ? GREEN : r.p < 0 ? RED : '#eef1ee' })),
+      settlements, hasSettle: settlements.length > 0, noSettle: !settlements.length,
+      backToDen: () => this.setState({ screen: 'den' }),
+    };
+  }
+}
+</script>
+</body>
+</html>
